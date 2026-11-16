@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{baseUrl}}/api/tasks"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "title": "Zła tablica",
+      "priority": "low",
+      "boardId": 999999
+    }
+order: 6000

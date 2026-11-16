@@ -1,0 +1,13 @@
+# Use this workspace to collaborate
+workspace:
+  id: 6bf18750-d727-4d66-8aa9-09c93b5c4fbb
+
+localResources:
+  collections:
+    - ../docs/postman/TaskBoard — TB-2 API
+
+# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
+
+cloudResources:
+  collections:
+    ../docs/postman/TaskBoard — TB-2 API: 7c7e2d91-2d30-4d3c-9e3e-2b4b6b5c1a20

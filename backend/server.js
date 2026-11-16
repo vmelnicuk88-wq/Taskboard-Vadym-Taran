@@ -5,8 +5,8 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
-app.get('/api/health',(req,res => {
+app.get('/api/health',(req,res) => {
     res.json({ok:true});
-}));
+});
 
 app.listen(3000, () => console.log('Serwer:https://localhost:3000'));

@@ -65,6 +65,9 @@ test('API TaskBoard: sesja, tablice, zadania, filtry i usuwanie', {
   assert.equal(result.response.status, 200);
   assert.ok(result.data.some(board => board.id === boardId));
 
+  result = await request('/tasks', 'POST', { boardId, title: '' }, cookie);
+  assert.equal(result.response.status, 400);
+
   result = await request('/tasks', 'POST', {
     boardId, title: 'Przetestować API', priority: 'high', status: 'todo', assigneeId: userId
   }, cookie);
@@ -81,6 +84,9 @@ test('API TaskBoard: sesja, tablice, zadania, filtry i usuwanie', {
   assert.equal(result.response.status, 400);
   result = await request('/boards/' + boardId + '/tasks?priority=pilne', 'GET', null, cookie);
   assert.equal(result.response.status, 400);
+
+  result = await request('/tasks/999999', 'PUT', { title: 'Nieistniejące zadanie', status: 'todo', priority: 'medium' }, cookie);
+  assert.equal(result.response.status, 404);
 
   result = await request('/tasks/' + taskId, 'GET', null, cookie);
   assert.equal(result.response.status, 200);

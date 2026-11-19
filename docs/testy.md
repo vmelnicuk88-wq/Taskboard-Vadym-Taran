@@ -1,20 +1,20 @@
 # TB-3: Raport przypadków testowych
 
-Poniższe przypadki obejmują API i interfejs. Wynik „Do wykonania” oznacza, że nie przeprowadzono jeszcze testu z działającym serwerem MySQL i przeglądarką; nie należy zapisywać go jako zaliczonego bez sprawdzenia.
+Poniższe przypadki obejmują API i interfejs. Status „Zgodny (test API w CI)” oznacza wynik uzyskany w automatycznym teście z MySQL 8 na GitHub Actions. Status „Do wykonania” dotyczy testów przeglądarkowych, których nie przeprowadzono w CI.
 
 | ID | Scenariusz | Kroki | Oczekiwany wynik | Wynik |
 | --- | --- | --- | --- | --- |
-| T-01 | Zdrowie serwera | GET /api/health | 200, ok=true | Do wykonania lokalnie |
-| T-02 | Tablice bez sesji | GET /api/boards bez logowania | 401 | Do wykonania lokalnie |
-| T-03 | Błędne hasło | POST /api/auth/login z nieprawidłowym hasłem | 401, komunikat | Do wykonania lokalnie |
-| T-04 | Poprawne logowanie | POST /api/auth/login konta testowego | 200, dane bez hasła | Do wykonania lokalnie |
-| T-05 | Zajęty login | POST /api/auth/register na istniejący login | 409 | Do wykonania lokalnie |
-| T-06 | Pusty tytuł | POST /api/tasks bez tytułu | 400 | Do wykonania lokalnie |
-| T-07 | Błędny priorytet | GET /api/boards/1/tasks?priority=pilne | 400 | Do wykonania lokalnie |
-| T-08 | Błędna osoba | GET /api/boards/1/tasks?assigneeId=abc | 400 | Do wykonania lokalnie |
-| T-09 | Wszystkie filtry | GET /api/boards/1/tasks?priority=high&assigneeId=2&q=api | 200, wynik zgodny z 3 filtrami | Do wykonania lokalnie |
-| T-10 | Nieistniejące zadanie | PUT /api/tasks/999999 | 404 | Do wykonania lokalnie |
-| T-11 | Wylogowanie | POST /api/auth/logout, potem GET /api/auth/me | 204, następnie 401 | Do wykonania lokalnie |
+| T-01 | Zdrowie serwera | GET /api/health | 200, ok=true | Zgodny (test API w CI) |
+| T-02 | Tablice bez sesji | GET /api/boards bez logowania | 401 | Zgodny (test API w CI) |
+| T-03 | Błędne hasło | POST /api/auth/login z nieprawidłowym hasłem | 401, komunikat | Zgodny (test API w CI) |
+| T-04 | Poprawne logowanie | POST /api/auth/login konta testowego | 200, dane bez hasła | Zgodny (test API w CI) |
+| T-05 | Zajęty login | POST /api/auth/register na istniejący login | 409 | Zgodny (test API w CI) |
+| T-06 | Pusty tytuł | POST /api/tasks bez tytułu | 400 | Zgodny (test API w CI) |
+| T-07 | Błędny priorytet | GET /api/boards/1/tasks?priority=pilne | 400 | Zgodny (test API w CI) |
+| T-08 | Błędna osoba | GET /api/boards/1/tasks?assigneeId=abc | 400 | Zgodny (test API w CI) |
+| T-09 | Wszystkie filtry | GET /api/boards/1/tasks?priority=high&assigneeId=2&q=api | 200, wynik zgodny z 3 filtrami | Zgodny (test API w CI) |
+| T-10 | Nieistniejące zadanie | PUT /api/tasks/999999 | 404 | Zgodny (test API w CI) |
+| T-11 | Wylogowanie | POST /api/auth/logout, potem GET /api/auth/me | 204, następnie 401 | Zgodny (test API w CI) |
 | T-12 | Rejestracja w UI | Na login.html wybierz rejestrację i podaj złe dane | is-invalid i komunikat | Do wykonania w przeglądarce |
 | T-13 | Edycja tablicy | Utwórz, edytuj i usuń tablicę | Dane zmienione, usuwanie po potwierdzeniu | Do wykonania w przeglądarce |
 | T-14 | Edycja zadania | Utwórz zadanie, otwórz szczegóły, edytuj | Modal i aktualizacja listy | Do wykonania w przeglądarce |

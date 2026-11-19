@@ -1,0 +1,7 @@
+:root { --tb-accent: #2563eb; --tb-background: #f4f7fb; }
+body { background: var(--tb-background); color: #1f2937; }
+.navbar { box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.card { border: 1px solid #e5e7eb; border-radius: .75rem; }
+.card:hover { box-shadow: 0 6px 18px rgba(0,0,0,.06); }
+.btn-primary { background-color: var(--tb-accent); border-color: var(--tb-accent); }
+.task-column { min-height: 18rem; background: #eef2f7; border-radius: .75rem; padding: 1rem; }

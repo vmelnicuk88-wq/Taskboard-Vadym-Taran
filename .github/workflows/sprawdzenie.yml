@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: 20
 
+      - name: Testy filtrów API
+        run: cd backend && npm ci && npm test
+
       - name: Struktura projektu
         run: bash .github/sprawdzenie.sh
 

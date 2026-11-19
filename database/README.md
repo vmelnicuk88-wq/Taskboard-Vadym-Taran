@@ -1,3 +1,4 @@
-# TB1 database
+# Baza danych TaskBoard
 
-Folder na schemat bazy danych i pliki instalacyjne. Początkowy model danych jest opisany w `docs/dane.md`.
+MySQL 8.0+ przechowuje użytkowników, tablice i zadania.
+Skrypt taskboard.sql tworzy bazę i relacje według materialy/erd.md; konta.sql objaśnia sposób utworzenia kont testowych przez formularz rejestracji.

@@ -1,0 +1,27 @@
+# Tworzy tag v1.0 na kodzie scalonym do main, gdy tag jeszcze nie istnieje.
+name: Wydanie v1.0
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pobranie kodu
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Oznaczenie wydania
+        run: |
+          if git ls-remote --exit-code --tags origin refs/tags/v1.0; then
+            echo "Tag v1.0 już istnieje."
+          else
+            git tag v1.0 "$GITHUB_SHA"
+            git push origin refs/tags/v1.0
+          fi

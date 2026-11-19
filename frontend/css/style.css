@@ -1,0 +1,10 @@
+:root { --tb-accent: #2457c5; --tb-background: #f3f6fb; --tb-ink: #1e2a3b; }
+body { background: var(--tb-background); color: var(--tb-ink); }
+.navbar { box-shadow: 0 2px 8px rgba(20,42,80,.08); }
+.card { border: 1px solid #dee5f1; border-radius: .85rem; }
+.card:hover { box-shadow: 0 7px 20px rgba(22,43,78,.07); }
+.btn-primary { background-color: var(--tb-accent); border-color: var(--tb-accent); }
+.btn-primary:hover { background-color: #1a459f; border-color: #1a459f; }
+.task-column { min-height: 15rem; background: #e9eef8; border-radius: .85rem; padding: 1rem; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #ffb800; outline-offset: 2px; }
+@media (max-width: 575px) { .task-column { min-height: 8rem; } .navbar .container { gap: .4rem; } .card .btn { margin-bottom: .3rem; } }

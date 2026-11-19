@@ -1,5 +1,10 @@
--- Konta testowe: najpierw uruchom taskboard.sql.
--- Utwórz użytkowników przez stronę Rejestracja (hasła są hashowane bcrypt).
--- Brak zapisanych w repozytorium poświadczeń testowych.
+-- Import demonstracyjnych użytkowników z materialy/users.csv.
+-- Hasło do kont testowych (tylko środowisko szkoleniowe): Test1234!
+-- Nie stosować tych kont na serwerze produkcyjnym.
 USE taskboard;
-SELECT 'Utwórz konto przez /login.html -> Rejestracja' AS instrukcja;
+INSERT IGNORE INTO users (login, passwordHash, firstName, lastName) VALUES
+('anna.nowak', '$2a$10$qCgFwKm4Qiu60z3cTqCvz.DZUvPNVnkJQjMagc4wtx24LiYjsF./y', 'Anna', 'Nowak'),
+('jan.kowalski', '$2a$10$qCgFwKm4Qiu60z3cTqCvz.DZUvPNVnkJQjMagc4wtx24LiYjsF./y', 'Jan', 'Kowalski'),
+('ola.wisniewska', '$2a$10$qCgFwKm4Qiu60z3cTqCvz.DZUvPNVnkJQjMagc4wtx24LiYjsF./y', 'Ola', 'Wiśniewska'),
+('piotr.zielinski', '$2a$10$qCgFwKm4Qiu60z3cTqCvz.DZUvPNVnkJQjMagc4wtx24LiYjsF./y', 'Piotr', 'Zieliński'),
+('kasia.lewandowska', '$2a$10$qCgFwKm4Qiu60z3cTqCvz.DZUvPNVnkJQjMagc4wtx24LiYjsF./y', 'Kasia', 'Lewandowska');

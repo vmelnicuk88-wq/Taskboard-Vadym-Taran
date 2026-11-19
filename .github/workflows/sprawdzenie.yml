@@ -9,6 +9,25 @@ on:
 jobs:
   sprawdzenie:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    env:
+      DB_HOST: 127.0.0.1
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: taskboard
+      SESSION_SECRET: testowa-sesja-github-actions-nie-uzywac-na-serwerze
+      TB_RUN_INTEGRATION: '1'
     steps:
       - name: Pobranie kodu
         uses: actions/checkout@v4
@@ -17,6 +36,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+
+      - name: Instalacja zależności
+        run: cd backend && npm install --no-audit --no-fund
+
+      - name: Przygotowanie bazy MySQL
+        run: node backend/tests/setup-db.js
+
+      - name: Testy filtrów i API
+        run: cd backend && npm test
 
       - name: Struktura projektu
         run: bash .github/sprawdzenie.sh

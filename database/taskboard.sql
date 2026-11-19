@@ -1,0 +1,41 @@
+-- TaskBoard / MySQL 8.0+
+CREATE DATABASE IF NOT EXISTS taskboard CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE taskboard;
+CREATE TABLE IF NOT EXISTS users (
+ id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ login VARCHAR(30) NOT NULL UNIQUE,
+ passwordHash VARCHAR(60) NOT NULL,
+ firstName VARCHAR(80) NOT NULL,
+ lastName VARCHAR(80) NOT NULL,
+ createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+CREATE TABLE IF NOT EXISTS boards (
+ id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ name VARCHAR(80) NOT NULL,
+ description TEXT NULL,
+ ownerId INT UNSIGNED NOT NULL,
+ createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ isDeleted TINYINT(1) NOT NULL DEFAULT 0,
+ deletedAt DATETIME NULL,
+ deletedById INT UNSIGNED NULL,
+ FOREIGN KEY (ownerId) REFERENCES users(id),
+ FOREIGN KEY (deletedById) REFERENCES users(id)
+) ENGINE=InnoDB;
+CREATE TABLE IF NOT EXISTS tasks (
+ id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ title VARCHAR(100) NOT NULL,
+ description TEXT NULL,
+ status ENUM('todo','in_progress','done') NOT NULL DEFAULT 'todo',
+ priority ENUM('low','medium','high') NOT NULL DEFAULT 'medium',
+ deadline DATE NULL,
+ boardId INT UNSIGNED NOT NULL,
+ assigneeId INT UNSIGNED NULL,
+ createdAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ isDeleted TINYINT(1) NOT NULL DEFAULT 0,
+ deletedAt DATETIME NULL,
+ deletedById INT UNSIGNED NULL,
+ INDEX idx_tasks_filters (boardId,isDeleted,priority,assigneeId),
+ FOREIGN KEY (boardId) REFERENCES boards(id),
+ FOREIGN KEY (assigneeId) REFERENCES users(id),
+ FOREIGN KEY (deletedById) REFERENCES users(id)
+) ENGINE=InnoDB;

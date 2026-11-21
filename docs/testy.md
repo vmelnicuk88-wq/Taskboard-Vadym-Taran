@@ -15,6 +15,9 @@ Poniższe przypadki obejmują API i interfejs. Status „Zgodny (test API w CI)�
 | T-09 | Wszystkie filtry | GET /api/boards/1/tasks?priority=high&assigneeId=2&q=api | 200, wynik zgodny z 3 filtrami | Zgodny (test API w CI) |
 | T-10 | Nieistniejące zadanie | PUT /api/tasks/999999 | 404 | Zgodny (test API w CI) |
 | T-11 | Wylogowanie | POST /api/auth/logout, potem GET /api/auth/me | 204, następnie 401 | Zgodny (test API w CI) |
+| T-19 | Nieistniejący assigneeId | POST /api/tasks z assigneeId=999999 | 400 | Scenariusz dodany do testu API w CI |
+| T-20 | Błędny deadline | POST i PUT /api/tasks z datą 2026-02-31 | 400 | Scenariusz dodany do testu API w CI |
+| T-21 | PUT na nieistniejącą tablicę | PUT /api/tasks/:id z boardId=999999 | 404 | Scenariusz dodany do testu API w CI |
 | T-12 | Rejestracja w UI | Na login.html wybierz rejestrację i podaj złe dane | is-invalid i komunikat | Do wykonania w przeglądarce |
 | T-13 | Edycja tablicy | Utwórz, edytuj i usuń tablicę | Dane zmienione, usuwanie po potwierdzeniu | Do wykonania w przeglądarce |
 | T-14 | Edycja zadania | Utwórz zadanie, otwórz szczegóły, edytuj | Modal i aktualizacja listy | Do wykonania w przeglądarce |
@@ -25,7 +28,7 @@ Poniższe przypadki obejmują API i interfejs. Status „Zgodny (test API w CI)�
 
 ## Testy automatyczne
 
-Plik backend/tests/taskFilters.test.js sprawdza budowanie zapytań, poprawne filtry łączone, nieprawidłowe identyfikatory i limit długości. Uruchom w katalogu backend polecenie npm test; test jest także w GitHub Actions. Wynik w workflow stanowi potwierdzenie wyłącznie tej części logiki, nie całej aplikacji.
+Testy jednostkowe `backend/tests/taskFilters.test.js` i `backend/tests/taskValidation.test.js` sprawdzają filtrowanie oraz walidację identyfikatorów i dat. `backend/tests/integration.test.js` sprawdza rzeczywiste trasy API z MySQL 8, gdy ustawiono `TB_RUN_INTEGRATION=1`. Workflow GitHub Actions przygotowuje bazę, ustawia tę zmienną i uruchamia `npm test`. Nie oznacza to wykonania testów w przeglądarce.
 
 ## Miejsce na wyniki pomiarów
 

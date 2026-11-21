@@ -24,5 +24,3 @@
 - POST zwraca 201, DELETE — 204.
 - Soft-deleted zadania nie pojawiają się na listach i pozostają w bazie.
 - `GET /api/users` nie ujawnia `passwordHash`.
-
-

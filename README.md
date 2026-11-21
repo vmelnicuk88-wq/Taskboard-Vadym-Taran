@@ -29,19 +29,15 @@ TaskBoard to aplikacja internetowa do zarządzania tablicami i zadaniami. Użytk
 
    ~~~sh
    mysql -u root -p < database/taskboard.sql
-   mysql -u root -p taskboard < database/konta.sql
+   mysql -u root -p < database/konta.sql
    ~~~
 
    Możesz także otworzyć oba skrypty w MySQL Workbench i uruchomić je kolejno.
 
-3. Utwórz użytkownika aplikacji w konsoli MySQL (zmień przykładowe hasło):
-
-   ~~~sql
-   CREATE USER IF NOT EXISTS 'taskboard_app'@'127.0.0.1' IDENTIFIED BY 'lokalne_mocne_haslo';
-   GRANT SELECT, INSERT, UPDATE, DELETE ON taskboard.* TO 'taskboard_app'@'127.0.0.1';
-   ~~~
-
-   Jeżeli konto już istnieje z innym hasłem, ustaw w pliku .env jego faktyczne dane.
+3. Plik `konta.sql` tworzy konta aplikacji, podglądu i administratora.
+   Przed użyciem zmień przykładowe hasła w skrypcie i w `.env`.
+   Konto `taskboard_app` ma `SELECT, INSERT, UPDATE` (bez `DELETE`);
+   zadania i tablice są usuwane miękko przez `UPDATE`.
 
 4. Skopiuj przykładową konfigurację z głównego folderu: na Windows użyj polecenia copy, w bash cp.
 
@@ -65,7 +61,7 @@ TaskBoard to aplikacja internetowa do zarządzania tablicami i zadaniami. Użytk
 
 ## Konta testowe
 
-Skrypt database/konta.sql wprowadza pięć demonstracyjnych kont z pliku materialy/users.csv. Przykład: login **anna.nowak**, hasło **Test1234!**. Te dane są wyłącznie do lokalnych ćwiczeń, nie wolno używać ich na publicznym serwerze.
+Skrypt database/taskboard.sql wprowadza pięć demonstracyjnych kont z pliku materialy/users.csv. Przykład: login **anna.nowak**, hasło **Test1234!**. Te dane są wyłącznie do lokalnych ćwiczeń, nie wolno używać ich na publicznym serwerze.
 
 ## Korzystanie z aplikacji
 
@@ -73,7 +69,7 @@ Po zalogowaniu strona boards.html pozwala tworzyć, otwierać, zmieniać i usuwa
 
 ## Testy i sprawdzenie projektu
 
-W folderze backend uruchom npm test, aby uruchomić automatyczne testy łączonych filtrów. Scenariusze ręczne API i interfejsu są w docs/testy.md. Po starcie serwera sprawdź każdy plik HTML w W3C Nu Validator, a w DevTools uruchom Lighthouse w trybie Accessibility. Docelowy wynik to minimum 90 punktów na każdej stronie; nie wpisuj wyniku bez pomiaru. Sprawdź także telefon w trybie Responsive Design.
+W folderze backend uruchom npm test, aby uruchomić testy jednostkowe filtrów i walidacji. Testy API wymagają MySQL i zmiennej TB_RUN_INTEGRATION=1. Workflow GitHub Actions wykonuje oba rodzaje testów. Scenariusze ręczne API i interfejsu są w docs/testy.md. Po starcie serwera sprawdź każdy plik HTML w W3C Nu Validator, a w DevTools uruchom Lighthouse w trybie Accessibility. Docelowy wynik to minimum 90 punktów na każdej stronie; nie wpisuj wyniku bez pomiaru. Sprawdź także telefon w trybie Responsive Design.
 
 ## Struktura projektu
 
@@ -81,7 +77,7 @@ W folderze backend uruchom npm test, aby uruchomić automatyczne testy łączony
 | --- | --- |
 | frontend/ | Strony HTML, style CSS i kod przeglądarkowy |
 | backend/ | Serwer Express, sesje, API, testy i połączenie z bazą |
-| database/ | Schemat SQL i szkoleniowe konta |
+| database/ | Schemat SQL, dane testowe, uprawnienia kont i kopia zapasowa |
 | docs/ | Model danych, lista zadań, dokumentacja API i raport testów |
 | materialy/ | Materiały, makiety i przykłady przekazane na zajęciach |
 | .github/ | Automatyczne kontrole projektu w GitHub Actions |

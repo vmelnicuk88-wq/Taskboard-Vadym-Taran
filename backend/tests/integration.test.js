@@ -69,6 +69,16 @@ test('API TaskBoard: sesja, tablice, zadania, filtry i usuwanie', {
   assert.equal(result.response.status, 400);
 
   result = await request('/tasks', 'POST', {
+    boardId, title: 'Nieprawidłowa osoba', assigneeId: 999999
+  }, cookie);
+  assert.equal(result.response.status, 400);
+
+  result = await request('/tasks', 'POST', {
+    boardId, title: 'Błędny termin', deadline: '2026-02-31'
+  }, cookie);
+  assert.equal(result.response.status, 400);
+
+  result = await request('/tasks', 'POST', {
     boardId, title: 'Przetestować API', priority: 'high', status: 'todo', assigneeId: userId
   }, cookie);
   assert.equal(result.response.status, 201, logs);
@@ -91,6 +101,21 @@ test('API TaskBoard: sesja, tablice, zadania, filtry i usuwanie', {
   result = await request('/tasks/' + taskId, 'GET', null, cookie);
   assert.equal(result.response.status, 200);
   const task = result.data;
+  result = await request('/tasks/' + taskId, 'PUT', {
+    ...task, assigneeId: 999999
+  }, cookie);
+  assert.equal(result.response.status, 400);
+
+  result = await request('/tasks/' + taskId, 'PUT', {
+    ...task, deadline: '2026-02-31'
+  }, cookie);
+  assert.equal(result.response.status, 400);
+
+  result = await request('/tasks/' + taskId, 'PUT', {
+    ...task, boardId: 999999
+  }, cookie);
+  assert.equal(result.response.status, 404);
+
   result = await request('/tasks/' + taskId, 'PUT', { ...task, status: 'in_progress' }, cookie);
   assert.equal(result.response.status, 200);
   result = await request('/tasks/' + taskId, 'DELETE', null, cookie);

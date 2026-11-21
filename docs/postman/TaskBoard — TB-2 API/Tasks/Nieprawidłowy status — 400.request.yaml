@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{baseUrl}}/api/tasks"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "title": "Błędny status",
+      "status": "waiting",
+      "priority": "low",
+      "boardId": 1
+    }
+order: 5000

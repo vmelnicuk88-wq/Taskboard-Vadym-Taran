@@ -1,10 +1,52 @@
-:root { --tb-accent: #2457c5; --tb-background: #f3f6fb; --tb-ink: #1e2a3b; }
-body { background: var(--tb-background); color: var(--tb-ink); }
-.navbar { box-shadow: 0 2px 8px rgba(20,42,80,.08); }
-.card { border: 1px solid #dee5f1; border-radius: .85rem; }
-.card:hover { box-shadow: 0 7px 20px rgba(22,43,78,.07); }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --tb-accent: #6c5ce7;
+  --tb-accent-hover: #5144be;
+  --tb-background: #f5f6fb;
+  --tb-ink: #253045;
+  --tb-navbar: #24263d;
+}
+body {
+  background: var(--tb-background);
+  color: var(--tb-ink);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+.tb-navbar { background: var(--tb-navbar); box-shadow: 0 3px 12px #16172d20; }
+.tb-navbar .navbar-brand { letter-spacing: -.03em; }
 .btn-primary { background-color: var(--tb-accent); border-color: var(--tb-accent); }
-.btn-primary:hover { background-color: #1a459f; border-color: #1a459f; }
-.task-column { min-height: 15rem; background: #e9eef8; border-radius: .85rem; padding: 1rem; }
-button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #ffb800; outline-offset: 2px; }
-@media (max-width: 575px) { .task-column { min-height: 8rem; } .navbar .container { gap: .4rem; } .card .btn { margin-bottom: .3rem; } }
+.btn-primary:hover, .btn-primary:focus {
+  background-color: var(--tb-accent-hover); border-color: var(--tb-accent-hover);
+}
+.btn-outline-primary { color: var(--tb-accent); border-color: var(--tb-accent); }
+.btn-outline-primary:hover { background: var(--tb-accent); border-color: var(--tb-accent); }
+.card { border: 1px solid #e3e5ef; border-radius: 1rem; }
+.card:hover { box-shadow: 0 7px 20px #162b4e14; }
+.board-card { border-top: 4px solid var(--tb-accent); }
+.board-card .card-body { padding: 1.4rem; }
+.login-page { min-height: 100vh; background: linear-gradient(140deg, #f6f5ff, #edf1fa); }
+.login-page .card { margin-top: 7vh; border: 0; }
+.login-page h1 { color: var(--tb-navbar); font-weight: 800; }
+.task-column { min-height: 18rem; border-radius: 1rem; padding: 1rem; border: 1px solid #e5e8f2; }
+.column-todo { background: #eef0fc; }
+.column-in_progress { background: #fff5e6; }
+.column-done { background: #eaf8f2; }
+.column-heading { font-weight: 700; margin-bottom: 1.1rem; }
+.column-todo .column-heading { color: #464fba; }
+.column-in_progress .column-heading { color: #9d6515; }
+.column-done .column-heading { color: #207b58; }
+.task-card { border: 1px solid #e0e3ee; }
+.task-card .card-body { padding: 1rem; }
+.priority-badge { font-size: .72rem; padding: .4em .75em; }
+.priority-low { background: #e7ebf0; color: #334155; }
+.priority-medium { background: #fff0bf; color: #815500; }
+.priority-high { background: #ffe1e4; color: #a31835; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid #ffb800;
+  outline-offset: 2px;
+}
+@media (max-width: 575px) {
+  .task-column { min-height: 8rem; }
+  .navbar .container { gap: .4rem; }
+  .card .btn { margin-bottom: .3rem; }
+}

@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{baseUrl}}/api/tasks"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "title": "Nowe zadanie testowe",
+      "description": "Opis",
+      "status": "todo",
+      "priority": "medium",
+      "deadline": "2026-11-20",
+      "boardId": 1,
+      "assigneeId": 1
+    }
+order: 3000
